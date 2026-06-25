@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Portal Upload & Download</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="banner">
+            <img class="logo-sekolah" src="https://lh3.googleusercontent.com/d/1g-fsB1VI0E3nBwJq0RyrpPyuhXzyFdZv" alt="Logo Sekolah">
+            <h2>Selamat Datang</h2>
+            <p>"Selamat Datang, Upload Kerjaanmu, Download semaumu"</p>
+        </div>
+
+        <div class="form-section">
+            <div class="error-message" id="errorBox">Username atau Password salah!</div>
+            
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" placeholder="Masukkan username" required autocomplete="off">
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Masukkan password" required>
+                </div>
+                
+                <button type="submit" class="btn-login">Masuk Portal</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // PENGATURAN SINGLE USER & PASSWORD
+        const TARGET_USER = "admin";
+        const TARGET_PASS = "sekolah123";
+        
+        // URL Google Drive Tujuan
+        const REDIRECT_URL = "https://drive.google.com/drive/folders/1pp4v3BqCGOtC_ev_ENmLGRZqVgtGyaqp?usp=sharing";
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault(); 
+            
+            const userInput = document.getElementById('username').value;
+            const passInput = document.getElementById('password').value;
+            const errorBox = document.getElementById('errorBox');
+
+            if (userInput === TARGET_USER && passInput === TARGET_PASS) {
+                errorBox.style.display = 'none';
+                alert('Login Berhasil! Anda akan dialihkan ke Google Drive.');
+                window.location.href = REDIRECT_URL;
+            } else {
+                errorBox.style.display = 'block';
+                errorBox.style.animation = 'shake 0.3s ease';
+                setTimeout(() => errorBox.style.animation = '', 300);
+            }
+        });
+    </script>
+</body>
+</html>
